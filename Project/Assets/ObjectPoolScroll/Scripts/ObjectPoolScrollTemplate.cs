@@ -55,7 +55,7 @@ public class ObjectPoolScrollTemplate<T> : ObjectPoolScroll
     {
         ItemParamList.Clear();
         if (itemParams != null && itemParams.Length > 0) { ItemParamList.AddRange(itemParams); }
+        SetItemCount(0);
         SetItemCount(ItemParamList.Count);
-        Apply();
     }
 }

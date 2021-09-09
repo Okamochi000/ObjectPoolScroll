@@ -168,7 +168,7 @@ public class ObjectPoolScroll : UIBehaviour
         // •\Ž¦’†‚Å‚ ‚ê‚ÎXV‚·‚é
         if (index >= topItemIndex_ && index < (topItemIndex_ + poolItemList_.Count))
         {
-            RectTransform item = poolItemList_[(topItemIndex_ - index)];
+            RectTransform item = poolItemList_[(index - topItemIndex_)];
             if (item.gameObject.activeSelf)
             {
                 OnUpdateItem(index, item);
@@ -350,6 +350,12 @@ public class ObjectPoolScroll : UIBehaviour
 
         if (ItemCount < poolCount_)
         {
+            if (topItemIndex_ > 0)
+            {
+                topItemIndex_ = 0;
+                for (int i = 0; i < poolItemList_.Count; i++) { Apply(i); }
+            }
+
             emptyItemFirst_.gameObject.SetActive(false);
             emptyItemLast_.gameObject.SetActive(false);
             return;
