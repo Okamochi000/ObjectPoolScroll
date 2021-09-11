@@ -339,6 +339,11 @@ public class ObjectPoolScroll : UIBehaviour
                 if (updatedItemCallback != null) { updatedItemCallback(itemIndex, poolItemList_[i]); }
             }
         }
+        for (int i = activeCount; i < poolItemList_.Count; i++)
+        {
+            GameObject itemObj = poolItemList_[i].gameObject;
+            if (itemObj.activeSelf) { itemObj.SetActive(false); }
+        }
     }
 
     /// <summary>
