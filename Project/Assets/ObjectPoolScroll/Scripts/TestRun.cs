@@ -1,7 +1,7 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 /// <summary>
-/// ƒXƒNƒ[ƒ‹ƒeƒXƒg
+/// ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒ†ã‚¹ãƒˆ
 /// </summary>
 public class TestRun : MonoBehaviour
 {

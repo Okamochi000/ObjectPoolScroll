@@ -1,7 +1,7 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 
 /// <summary>
-/// ƒAƒCƒeƒ€‚ğƒeƒ“ƒvƒŒ[ƒg‰»‚µ‚½ƒIƒuƒWƒFƒNƒgƒv[ƒ‹ƒXƒNƒ[ƒ‹
+/// ã‚¢ã‚¤ãƒ†ãƒ ã‚’ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆåŒ–ã—ãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãƒ—ãƒ¼ãƒ«ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«
 /// </summary>
 /// <typeparam name="T"></typeparam>
 public class ObjectPoolScrollTemplate<T> : ObjectPoolScroll
@@ -9,7 +9,7 @@ public class ObjectPoolScrollTemplate<T> : ObjectPoolScroll
     public List<T> ItemParamList { get; private set; } = new List<T>();
 
     /// <summary>
-    /// ƒAƒCƒeƒ€‚ğ’Ç‰Á‚·‚é
+    /// ã‚¢ã‚¤ãƒ†ãƒ ã‚’è¿½åŠ ã™ã‚‹
     /// </summary>
     /// <param name="item"></param>
     public void AddItem(T itemParam)
@@ -19,7 +19,7 @@ public class ObjectPoolScrollTemplate<T> : ObjectPoolScroll
     }
 
     /// <summary>
-    /// ƒAƒCƒeƒ€”z—ñ‚ğ’Ç‰Á‚·‚é
+    /// ã‚¢ã‚¤ãƒ†ãƒ é…åˆ—ã‚’è¿½åŠ ã™ã‚‹
     /// </summary>
     /// <param name="itemParams"></param>
     public void AddItems(T[] itemParams)
@@ -29,7 +29,7 @@ public class ObjectPoolScrollTemplate<T> : ObjectPoolScroll
     }
 
     /// <summary>
-    /// ƒAƒCƒeƒ€‚ğ‘}“ü‚·‚é
+    /// ã‚¢ã‚¤ãƒ†ãƒ ã‚’æŒ¿å…¥ã™ã‚‹
     /// </summary>
     /// <param name="index"></param>
     /// <param name="itemParam"></param>
@@ -40,7 +40,7 @@ public class ObjectPoolScrollTemplate<T> : ObjectPoolScroll
         ItemParamList.Insert(index, itemParam);
         SetItemCount(ItemParamList.Count);
 
-        // ƒXƒNƒ[ƒ‹ˆÊ’u‚ª•Ï‚í‚ç‚È‚¢‚æ‚¤‚É‚·‚é
+        // ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ä½ç½®ãŒå¤‰ã‚ã‚‰ãªã„ã‚ˆã†ã«ã™ã‚‹
         if (IsItemActive(index) || index < TopIndex)
         {
             SeekTopIndex(prevTopIndex + 1);
@@ -48,7 +48,7 @@ public class ObjectPoolScrollTemplate<T> : ObjectPoolScroll
     }
 
     /// <summary>
-    /// V‚µ‚¢ƒAƒCƒeƒ€ƒŠƒXƒg‚É·‚µ‘Ö‚¦‚é
+    /// æ–°ã—ã„ã‚¢ã‚¤ãƒ†ãƒ ãƒªã‚¹ãƒˆã«å·®ã—æ›¿ãˆã‚‹
     /// </summary>
     /// <param name="itemParams"></param>
     public void Replaceitems(T[] itemParams)

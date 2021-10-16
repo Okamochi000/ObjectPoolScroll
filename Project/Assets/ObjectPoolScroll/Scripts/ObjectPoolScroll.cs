@@ -1,11 +1,11 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 /// <summary>
-/// ƒIƒuƒWƒFƒNƒgƒv[ƒ‹ƒXƒNƒ[ƒ‹
+/// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãƒ—ãƒ¼ãƒ«ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«
 /// </summary>
 public class ObjectPoolScroll : UIBehaviour
 {
@@ -32,7 +32,7 @@ public class ObjectPoolScroll : UIBehaviour
     }
 
     /// <summary>
-    /// ‰Šú‰»
+    /// åˆæœŸåŒ–
     /// </summary>
     public void Initialize()
     {
@@ -41,14 +41,14 @@ public class ObjectPoolScroll : UIBehaviour
         if (scrollRect.content == null) { return; }
         if (itemBase == null) { return; }
 
-        // ƒŒƒCƒAƒEƒgæ“¾
+        // ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆå–å¾—
         RectTransform content = scrollRect.content;
         if (!content.TryGetComponent<HorizontalOrVerticalLayoutGroup>(out layoutGroup_)) { return; }
 
-        // ƒŒƒCƒAƒEƒgİ’è
+        // ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆè¨­å®š
         if (layoutGroup_ is VerticalLayoutGroup)
         {
-            // cƒXƒNƒ[ƒ‹
+            // ç¸¦ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«
             isVertical_ = true;
             content.anchorMin = new Vector2(content.anchorMin.x, 1.0f);
             content.anchorMax = new Vector2(content.anchorMax.x, 1.0f);
@@ -56,7 +56,7 @@ public class ObjectPoolScroll : UIBehaviour
         }
         else if (layoutGroup_ is HorizontalLayoutGroup)
         {
-            // ‰¡ƒXƒNƒ[ƒ‹
+            // æ¨ªã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«
             isVertical_ = false;
             content.anchorMin = new Vector2(0.0f, content.anchorMin.y);
             content.anchorMax = new Vector2(0.0f, content.anchorMax.y);
@@ -64,15 +64,15 @@ public class ObjectPoolScroll : UIBehaviour
         }
         else
         {
-            // ƒGƒ‰[
+            // ã‚¨ãƒ©ãƒ¼
             layoutGroup_ = null;
             return;
         }
 
-        // ƒRƒs[Œ³”ñ•\¦
+        // ã‚³ãƒ”ãƒ¼å…ƒéè¡¨ç¤º
         itemBase.gameObject.SetActive(false);
 
-        // ‹óƒAƒCƒeƒ€¶¬
+        // ç©ºã‚¢ã‚¤ãƒ†ãƒ ç”Ÿæˆ
         GameObject emptyItemFirst = new GameObject("EmptyItemFirst");
         emptyItemFirst.SetActive(false);
         emptyItemFirst.transform.SetParent(itemBase.parent);
@@ -84,7 +84,7 @@ public class ObjectPoolScroll : UIBehaviour
         emptyItemFirst_.sizeDelta = Vector2.zero;
         emptyItemFirst.transform.SetAsFirstSibling();
 
-        // ‹óƒAƒCƒeƒ€¶¬
+        // ç©ºã‚¢ã‚¤ãƒ†ãƒ ç”Ÿæˆ
         GameObject emptyItemLast = new GameObject("EmptyItemLast");
         emptyItemLast.SetActive(false);
         emptyItemLast.transform.SetParent(itemBase.parent);
@@ -96,10 +96,10 @@ public class ObjectPoolScroll : UIBehaviour
         emptyItemLast_.sizeDelta = Vector2.zero;
         emptyItemLast_.transform.SetAsLastSibling();
 
-        // ‰Šú‰»ƒtƒ‰ƒO‚ğ—§‚Ä‚é
+        // åˆæœŸåŒ–ãƒ•ãƒ©ã‚°ã‚’ç«‹ã¦ã‚‹
         isInitialize_ = true;
 
-        // XV
+        // æ›´æ–°
         UpdatePoolCount();
         UpdateItemAcive();
         UpdateContentSize();
@@ -108,10 +108,10 @@ public class ObjectPoolScroll : UIBehaviour
 
     protected virtual void Update()
     {
-        // À•WXV
+        // åº§æ¨™æ›´æ–°
         UpdateItemPosition();
 
-        // íœ—\’èƒIƒuƒWƒFƒNƒgíœ
+        // å‰Šé™¤äºˆå®šã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆå‰Šé™¤
         if (destroyList_.Count > 0)
         {
             foreach (GameObject itemObj in destroyList_) { Destroy(itemObj); }
@@ -130,7 +130,7 @@ public class ObjectPoolScroll : UIBehaviour
     }
 
     /// <summary>
-    /// Å‘åƒAƒCƒeƒ€”‚ğİ’è‚·‚é
+    /// æœ€å¤§ã‚¢ã‚¤ãƒ†ãƒ æ•°ã‚’è¨­å®šã™ã‚‹
     /// </summary>
     /// <param name="count"></param>
     public void SetItemCount(int count)
@@ -144,28 +144,28 @@ public class ObjectPoolScroll : UIBehaviour
     }
 
     /// <summary>
-    /// ƒAƒCƒeƒ€‘S‘Ì‚ğXV‚·‚é
+    /// ã‚¢ã‚¤ãƒ†ãƒ å…¨ä½“ã‚’æ›´æ–°ã™ã‚‹
     /// </summary>
     public void Apply()
     {
         if (!isInitialize_) { return; }
 
-        // ‘S‚Ä‚ÌƒAƒCƒeƒ€‚ğ”ñƒAƒNƒeƒBƒu‚É‚·‚é
+        // å…¨ã¦ã®ã‚¢ã‚¤ãƒ†ãƒ ã‚’éã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã«ã™ã‚‹
         for (int i = 0; i < poolItemList_.Count; i++) { poolItemList_[i].gameObject.SetActive(false); }
 
-        // •K—v‚È•ª‚¾‚¯ƒAƒNƒeƒBƒu
+        // å¿…è¦ãªåˆ†ã ã‘ã‚¢ã‚¯ãƒ†ã‚£ãƒ–
         UpdateItemAcive();
     }
 
     /// <summary>
-    /// w’èƒAƒCƒeƒ€•ªXV‚·‚é
+    /// æŒ‡å®šã‚¢ã‚¤ãƒ†ãƒ åˆ†æ›´æ–°ã™ã‚‹
     /// </summary>
     /// <param name="index"></param>
     public void Apply(int index)
     {
         if (!isInitialize_) { return; }
 
-        // •\¦’†‚Å‚ ‚ê‚ÎXV‚·‚é
+        // è¡¨ç¤ºä¸­ã§ã‚ã‚Œã°æ›´æ–°ã™ã‚‹
         if (index >= topItemIndex_ && index < (topItemIndex_ + poolItemList_.Count))
         {
             RectTransform item = poolItemList_[(index - topItemIndex_)];
@@ -178,7 +178,7 @@ public class ObjectPoolScroll : UIBehaviour
     }
 
     /// <summary>
-    /// w’èƒAƒCƒeƒ€‚ª•\¦’†‚Å‚ ‚é‚©
+    /// æŒ‡å®šã‚¢ã‚¤ãƒ†ãƒ ãŒè¡¨ç¤ºä¸­ã§ã‚ã‚‹ã‹
     /// </summary>
     /// <param name="index"></param>
     /// <returns></returns>
@@ -192,7 +192,7 @@ public class ObjectPoolScroll : UIBehaviour
     }
 
     /// <summary>
-    /// w’èƒAƒCƒeƒ€‚ÌˆÊ’u‚ğæ“ª‚É‚·‚é
+    /// æŒ‡å®šã‚¢ã‚¤ãƒ†ãƒ ã®ä½ç½®ã‚’å…ˆé ­ã«ã™ã‚‹
     /// </summary>
     /// <param name="indeex"></param>
     public void SeekTopIndex(int index)
@@ -228,14 +228,14 @@ public class ObjectPoolScroll : UIBehaviour
     }
 
     /// <summary>
-    /// ƒAƒCƒeƒ€‚ªXV‚³‚ê‚½
+    /// ã‚¢ã‚¤ãƒ†ãƒ ãŒæ›´æ–°ã•ã‚ŒãŸ
     /// </summary>
     /// <param name="index"></param>
     /// <param name="targetObject"></param>
     protected virtual void OnUpdateItem(int index, RectTransform targetObject) { }
 
     /// <summary>
-    /// ƒv[ƒ‹”‚ğXV‚·‚é
+    /// ãƒ—ãƒ¼ãƒ«æ•°ã‚’æ›´æ–°ã™ã‚‹
     /// </summary>
     private void UpdatePoolCount()
     {
@@ -255,7 +255,7 @@ public class ObjectPoolScroll : UIBehaviour
     }
 
     /// <summary>
-    /// ƒRƒ“ƒeƒ“ƒcƒTƒCƒYXV
+    /// ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã‚µã‚¤ã‚ºæ›´æ–°
     /// </summary>
     private void UpdateContentSize()
     {
@@ -285,7 +285,7 @@ public class ObjectPoolScroll : UIBehaviour
     }
 
     /// <summary>
-    /// ƒAƒCƒeƒ€‚Ì•\¦ó‘ÔØ‘Ö
+    /// ã‚¢ã‚¤ãƒ†ãƒ ã®è¡¨ç¤ºçŠ¶æ…‹åˆ‡æ›¿
     /// </summary>
     private void UpdateItemAcive()
     {
@@ -293,7 +293,7 @@ public class ObjectPoolScroll : UIBehaviour
 
         if (poolCount_ < poolItemList_.Count)
         {
-            // ƒv[ƒ‹‚·‚éƒAƒCƒeƒ€‚ª‘½‚¢ê‡‚Í”jŠü
+            // ãƒ—ãƒ¼ãƒ«ã™ã‚‹ã‚¢ã‚¤ãƒ†ãƒ ãŒå¤šã„å ´åˆã¯ç ´æ£„
             RectTransform[] items = poolItemList_.ToArray();
             for (int i = poolCount_; i < poolItemList_.Count; i++)
             {
@@ -307,7 +307,7 @@ public class ObjectPoolScroll : UIBehaviour
         }
         else if (poolCount_ > poolItemList_.Count)
         {
-            // ƒv[ƒ‹‚·‚éƒAƒCƒeƒ€‚ª­‚È‚¢ê‡‚Í’Ç‰Á
+            // ãƒ—ãƒ¼ãƒ«ã™ã‚‹ã‚¢ã‚¤ãƒ†ãƒ ãŒå°‘ãªã„å ´åˆã¯è¿½åŠ 
             while (poolCount_ > poolItemList_.Count)
             {
                 GameObject copy = GameObject.Instantiate(itemBase.gameObject, itemBase.parent);
@@ -326,7 +326,7 @@ public class ObjectPoolScroll : UIBehaviour
             emptyItemLast_.transform.SetAsLastSibling();
         }
 
-        // •\¦ó‘ÔØ‘Ö
+        // è¡¨ç¤ºçŠ¶æ…‹åˆ‡æ›¿
         int activeCount = Mathf.Min(ItemCount, poolCount_);
         for (int i = 0; i < activeCount; i++)
         {
@@ -347,7 +347,7 @@ public class ObjectPoolScroll : UIBehaviour
     }
 
     /// <summary>
-    /// ƒAƒCƒeƒ€À•W‚ğXV‚·‚é
+    /// ã‚¢ã‚¤ãƒ†ãƒ åº§æ¨™ã‚’æ›´æ–°ã™ã‚‹
     /// </summary>
     private void UpdateItemPosition()
     {
@@ -376,7 +376,7 @@ public class ObjectPoolScroll : UIBehaviour
             activeItemHeight += layoutGroup_.spacing * (poolItemList_.Count - 1);
             RectTransform content = scrollRect.content;
 
-            // ‹óƒAƒCƒeƒ€‚ÌƒTƒCƒYXV(ã)
+            // ç©ºã‚¢ã‚¤ãƒ†ãƒ ã®ã‚µã‚¤ã‚ºæ›´æ–°(ä¸Š)
             int topOverItemCount = (int)(content.offsetMax.y / (itemBase.sizeDelta.y + layoutGroup_.spacing));
             if (topOverItemCount < 0) { topOverItemCount = 0; }
             else if (topOverItemCount > (ItemCount - poolCount_)) { topOverItemCount = ItemCount - poolCount_; }
@@ -389,7 +389,7 @@ public class ObjectPoolScroll : UIBehaviour
             }
             emptyItemFirst_.sizeDelta = topSize;
 
-            // ‹óƒAƒCƒeƒ€‚ÌƒTƒCƒYXV(‰º)
+            // ç©ºã‚¢ã‚¤ãƒ†ãƒ ã®ã‚µã‚¤ã‚ºæ›´æ–°(ä¸‹)
             int bottomOverItemCount = ItemCount - poolCount_ - topOverItemCount;
             Vector2 bottomSize = emptyItemLast_.sizeDelta;
             bottomSize.y = -layoutGroup_.spacing;
@@ -400,7 +400,7 @@ public class ObjectPoolScroll : UIBehaviour
             }
             emptyItemLast_.sizeDelta = bottomSize;
 
-            // QÆˆÊ’uXV
+            // å‚ç…§ä½ç½®æ›´æ–°
             topItemIndex_ = topOverItemCount;
         }
         else
@@ -409,7 +409,7 @@ public class ObjectPoolScroll : UIBehaviour
             activeItemWidth += layoutGroup_.spacing * (poolItemList_.Count - 1);
             RectTransform content = scrollRect.content;
 
-            // ‹óƒAƒCƒeƒ€‚ÌƒTƒCƒYXV(¶)
+            // ç©ºã‚¢ã‚¤ãƒ†ãƒ ã®ã‚µã‚¤ã‚ºæ›´æ–°(å·¦)
             int leftOverItemCount = (int)(-content.offsetMin.x / (itemBase.sizeDelta.x + layoutGroup_.spacing));
             if (leftOverItemCount < 0) { leftOverItemCount = 0; }
             else if (leftOverItemCount > (ItemCount - poolCount_)) { leftOverItemCount = ItemCount - poolCount_; }
@@ -422,7 +422,7 @@ public class ObjectPoolScroll : UIBehaviour
             }
             emptyItemFirst_.sizeDelta = leftSize;
 
-            // ‹óƒAƒCƒeƒ€‚ÌƒTƒCƒYXV(‰E)
+            // ç©ºã‚¢ã‚¤ãƒ†ãƒ ã®ã‚µã‚¤ã‚ºæ›´æ–°(å³)
             int rightOverItemCount = ItemCount - poolCount_ - leftOverItemCount;
             Vector2 rightSize = emptyItemLast_.sizeDelta;
             rightSize.x = -layoutGroup_.spacing;
@@ -433,24 +433,24 @@ public class ObjectPoolScroll : UIBehaviour
             }
             emptyItemLast_.sizeDelta = rightSize;
 
-            // QÆˆÊ’uXV
+            // å‚ç…§ä½ç½®æ›´æ–°
             topItemIndex_ = leftOverItemCount;
         }
 
-        // •\¦ƒAƒCƒeƒ€XV
+        // è¡¨ç¤ºã‚¢ã‚¤ãƒ†ãƒ æ›´æ–°
         if (prevTopItemIndex < topItemIndex_)
         {
             int replaceCount = topItemIndex_ - prevTopItemIndex;
             replaceCount = Mathf.Min(replaceCount, poolCount_);
             for (int i = 0; i < replaceCount; i++)
             {
-                // “ü‚ê‘Ö‚¦
+                // å…¥ã‚Œæ›¿ãˆ
                 RectTransform tempItem = poolItemList_[0];
                 RectTransform lastItem = poolItemList_[(poolItemList_.Count - 1)];
                 poolItemList_.RemoveAt(0);
                 poolItemList_.Add(tempItem);
                 tempItem.SetSiblingIndex(lastItem.GetSiblingIndex());
-                //  ƒR[ƒ‹ƒoƒbƒN
+                //  ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯
                 int itemIndex = topItemIndex_ + poolCount_ - replaceCount + i;
                 OnUpdateItem(itemIndex, tempItem);
                 if (updatedItemCallback != null) { updatedItemCallback(itemIndex, tempItem); }
@@ -462,20 +462,20 @@ public class ObjectPoolScroll : UIBehaviour
             replaceCount = Mathf.Min(replaceCount, poolCount_);
             for (int i = 0; i < replaceCount; i++)
             {
-                // “ü‚ê‘Ö‚¦
+                // å…¥ã‚Œæ›¿ãˆ
                 RectTransform tempItem = poolItemList_[(poolItemList_.Count - 1)];
                 RectTransform firstItem = poolItemList_[0];
                 poolItemList_.RemoveAt((poolItemList_.Count - 1));
                 poolItemList_.Insert(0, tempItem);
                 tempItem.SetSiblingIndex(firstItem.GetSiblingIndex());
-                // ƒR[ƒ‹ƒoƒbƒN
+                // ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯
                 int itemIndex = topItemIndex_ + replaceCount - i - 1;
                 OnUpdateItem(itemIndex, tempItem);
                 if (updatedItemCallback != null) { updatedItemCallback(itemIndex, tempItem); }
             }
         }
 
-        // ƒŒƒCƒAƒEƒgXV
+        // ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆæ›´æ–°
         if (isVertical_) { layoutGroup_.SetLayoutVertical(); }
         else { layoutGroup_.SetLayoutHorizontal(); }
     }

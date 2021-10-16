@@ -1,13 +1,13 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// •¶šŒ^ƒAƒCƒeƒ€ƒXƒNƒ[ƒ‹
+/// æ–‡å­—å‹ã‚¢ã‚¤ãƒ†ãƒ ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«
 /// </summary>
 public class StringinfiniteScroll : ObjectPoolScrollTemplate<string>
 {
     /// <summary>
-    /// ƒAƒCƒeƒ€‚ªXV‚³‚ê‚½
+    /// ã‚¢ã‚¤ãƒ†ãƒ ãŒæ›´æ–°ã•ã‚ŒãŸ
     /// </summary>
     /// <param name="index"></param>
     /// <param name="targetObject"></param>
